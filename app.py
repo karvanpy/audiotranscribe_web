@@ -1,42 +1,29 @@
-from flask import Flask, render_template, request, redirect
+import logging
+from Transcribe import transcribe
 import speech_recognition as sr
+from flask import Flask, render_template, request, redirect, url_for
+
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
+
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
-@app.route("/", methods=['GET','POST'])
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
+    text = ""
     if request.method == 'POST':
-        print("Form Received!")
-        # TODO: write code...
-        
-        # if file not have information redirect user to homepage
-        if "file" not in request.files:
-            return redirect(request.url)
-        
-        # if someone submit a blank file
-        # if file not imported and button got clicked
-        file = request.files["file"]
-        if file.filename == "":
-            return redirect(request.url)
-        
-        if file:
-            recognizer = sr.Recognizer()
-            audio_file = sr.AudioFile(file)
-            with audio_file as source:
-                data = recognizer.record(source)
-                
-            text = recognizer.recognize_google(data, key=None)
-            print(text)
-            
-    return render_template('index.html')
-    
-@app.route("/about")
-def about():
-    return "about page"
-    
-@app.route("/contact")
-def contact():
-    return "contact page"
+        logger.info("Received POST request")
+        language = request.form['language']
+        file = request.files['audiofile']
+
+        file.save(file.filename)
+
+        text = transcribe(file.filename, language=language)
+    return render_template('index.html', text=text)
+
 
 if __name__ == '__main__':
-    app.run(debug=True, threaded=True)
+    app.run(debug=True)
