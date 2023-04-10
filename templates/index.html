@@ -1,40 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <title>Speech Recognition with Flask</title>
+{% extends "base.html" %}
 
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    </head>
+{% block title %}AudioTranscribe{% endblock %}
 
-    <body class="">
-        <div class="container">
-            <div id="speech_recognition">
+{% block head %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
 
-                <h1 class="" >Upload Here</h1>
-                <form action="" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
-                    <input class="" type="file" name="file" id="file" value="" />
-                    <br />
-                    <!--input type="submit" name="" class="" value="transcribe" /-->
-                    <button class="btn btn-primary" type="submit">transcribe</button>
-                </form>
-                
-                {% if transcript != "" %}
-                <div id="speech_transcribe_container">
-                    <h1>Transcript</h1>
-                    <p class="">{{ transcript }}</p>
-                </div>
-                {% endif %}
 
-            </div>
-        </div>
+{% block content %}
+    <h1>AudioTranscribe</h1>
+    <p>Bring your audio file to text.</p>
+    <p>Support file format: .ogg .mp3 .wav</p>
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-    </body>
+    <form action="" method="post" enctype="multipart/form-data">
+        <input type="file" name="audiofile" id="" accept="audio/*">
+        <br>
+        <input type="radio" name="language" id="en" value="en-US" checked>
+        <label for="en">English</label>
+        <br>
+        <input type="radio" name="language" id="id" value="id-ID">
+        <label for="id">Indonesian</label>
+        <br>
 
-</html>
+        <input type="submit" value="Transcribe" disabled>
+    </form>
+
+
+<div class="result">
+    <h2>Result</h2>
+    {% if text %}
+        <p>{{ text }}</p>
+    {% endif %}
+</div>
+
+{% endblock %}
