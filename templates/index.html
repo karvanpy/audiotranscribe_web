@@ -2,36 +2,58 @@
 
 {% block title %}AudioTranscribe{% endblock %}
 
-{% block head %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
-{% endblock %}
-
-
 {% block content %}
-    <h1>AudioTranscribe</h1>
-    <p>Bring your audio file to text.</p>
-    <p>Support file format: .ogg .mp3 .wav</p>
-
-    <form action="" method="post" enctype="multipart/form-data">
-        <input type="file" name="audiofile" id="" accept="audio/*">
-        <br>
-        <input type="radio" name="language" id="en" value="en-US" checked>
-        <label for="en">English</label>
-        <br>
-        <input type="radio" name="language" id="id" value="id-ID">
-        <label for="id">Indonesian</label>
-        <br>
-
-        <input type="submit" value="Transcribe" disabled>
-    </form>
-
-
-<div class="result">
-    <h2>Result</h2>
-    {% if text %}
-        <p>{{ text }}</p>
-    {% endif %}
+<div class="content">
+    <div class="container">
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8">
+                <div class="card p-4">
+                    <h1 class="text-center mb-0">AudioTranscribe</h1>
+                    <p class="text-center mb-0">Bring your audio files into text</p>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8">
+                <form action="" method="post" enctype="multipart/form-data" class="card p-4">
+                    <div class="mb-3">
+                        <h6 class="mb-0">File Supported: <code>.ogg</code> <code>.mp3</code> <code>.wav</code></h6>
+                    </div>
+                    <div class="mb-3">
+                        <label for="audiofile" class="form-label">Select audio file</label>
+                        <input type="file" class="form-control" name="audiofile" id="audiofile" accept="audio/*" required />
+                        <div class="invalid-feedback">Please choose an audio file.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="language" class="form-label">Select language</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="language" id="en" value="en-US" checked />
+                                <label class="form-check-label" for="en">English</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="language" id="id" value="id-ID" />
+                                <label class="form-check-label" for="id">Indonesian</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Transcribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8">
+                <div class="card p-4">
+                    <h2 class="mb-4">Result</h2>
+                    <p class="lead">{{ text }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
+
+<footer>
+    <p>karvanpy</p>
+</footer>
