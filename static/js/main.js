@@ -1,10 +1,10 @@
 $(document).ready(function() {
     $('input[type="file"]').change(function() {
         if ($(this).val()) {
-            $('input[type="submit"]').attr('disabled', false);
+            $('button[type="submit"]').attr('disabled', false);
         }
         else {
-            $('input[type="submit"]').attr('disabled', true);
+            $('button[type="submit"]').attr('disabled', true);
         }
     });
 });
