@@ -1,43 +1,9 @@
 {
+  "version": 2,
   "builds": [
-    {
-      "src": "app.py",
-      "use": "@vercel/python"
-    }
+    { "src": "app.py", "use": "@vercel/python" }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/app.py"
-    }
-  ],
-  "env": {
-    "FLASK_APP": "app.py",
-    "FLASK_ENV": "production"
-  },
-  "builds": [
-    {
-      "src": "app.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/app.py"
-    }
-  ],
-  "env": {
-    "FLASK_APP": "app.py",
-    "FLASK_ENV": "production"
-  },
-  "build": {
-    "env": {
-      "VERCEL_BUILD_BASE": "/vercel/build",
-      "VERCEL_CACHE_DIR": "/vercel/cache",
-      "VERCEL_OUTPUT_DIR": "/vercel/path"
-    },
-    "command": "flask run --host=0.0.0.0 --port=$PORT",
-    "use": "@vercel/static"
-  }
+    { "src": "/", "dest": "/app.py" }
+  ]
 }
