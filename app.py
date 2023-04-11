@@ -15,13 +15,16 @@ app = Flask(__name__)
 def index():
     text = ""
     if request.method == 'POST':
-        logger.info("Received POST request")
         language = request.form['language']
         file = request.files['audiofile']
 
+        # Save the audio locally
         file.save(file.filename)
 
         text = transcribe(file.filename, language=language)
+        return redirect(url_for('index', text=text))
+
+    text = request.args.get('text', '')
     return render_template('index.html', text=text)
 
 
