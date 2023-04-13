@@ -20,7 +20,19 @@
 
 {% block scripts %}
 <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $('input[type="file"]').change(function() {
+            if ($(this).val()) {
+                $('button[type="submit"]').attr('disabled', false);
+            }
+            else {
+                $('button[type="submit"]').attr('disabled', true);
+            }
+        });
+    });
+</script>
+<!-- <script src="{{ url_for('static', filename='js/main.js') }}"></script> -->
 {% endblock %}
 </body>
 </html>
