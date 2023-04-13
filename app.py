@@ -19,7 +19,7 @@ def index():
         file = request.files['audiofile']
 
         # Save the audio locally
-        file.save(file.filename)
+        file.save("/tmp/"+file.filename)
 
         text = transcribe(file.filename, language=language)
         return redirect(url_for('index', text=text))
