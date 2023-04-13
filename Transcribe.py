@@ -36,7 +36,7 @@ def transcribe(audiofile, language='en-US'):
 
     logger.info("Transcription: %s", text)
 
-    os.remove(audiofile)
-    os.remove(f)
+    os.remove("/tmp/"+audiofile)
+    os.remove("/tmp/"+f)
 
     return text
