@@ -21,7 +21,7 @@ def index():
         # Save the audio locally
         file.save("/tmp/"+file.filename)
 
-        text = transcribe(file.filename, language=language)
+        text = transcribe("/tmp/"+file.filename, language=language)
         return redirect(url_for('index', text=text))
 
     text = request.args.get('text', '')
