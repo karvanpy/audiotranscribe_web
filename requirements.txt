@@ -1,4 +1,5 @@
 flask==2.2.2
 ffmpeg-python==0.2.0
+ffprobe-python==1.0.3
 pydub==0.25.1
 SpeechRecognition==3.10.0
